@@ -35,6 +35,7 @@ class KBTest(unittest.TestCase):
         expectedMovables = [
             'fact: (movable disk1 peg1 peg2)',
             'fact: (movable disk1 peg1 peg3)',
+
         ]
         self.checkMovables(th, expectedMovables)
 
@@ -100,6 +101,7 @@ class KBTest(unittest.TestCase):
         ]
         self.checkMovables(th, expectedMovables)
 
+    
     def test06(self):
         th = TowerOfHanoiGame()
         th.read('hanoi_smallest_on_three_second_smallest_on_two.txt')
@@ -121,6 +123,33 @@ class KBTest(unittest.TestCase):
             'fact: (movable disk5 peg1 peg3)',
         ]
         self.checkKb(th.kb, required, forbidden)
+
+
+    def test09(self):
+        th = Puzzle8Game()
+        th.read('puzzle8_center_empty.txt')
+        expectedMovables = [
+            'fact: (movable tile2 pos2 pos1 pos2 pos2)',
+            'fact: (movable tile8 pos1 pos2 pos2 pos2)',
+            'fact: (movable tile6 pos2 pos3 pos2 pos2)',
+            'fact: (movable tile4 pos3 pos2 pos2 pos2)',
+        ]
+        self.checkMovables(th, expectedMovables)
+
+    def test10(self):
+        p8 = Puzzle8Game()
+        p8.read('puzzle8_center_empty.txt')
+        required = []
+        forbidden = [
+            'fact: (movable tile1 pos1 pos1 pos2 pos2)',
+            'fact: (movable tile3 pos3 pos1 pos2 pos2)',
+            'fact: (movable tile7 pos3 pos1 pos2 pos2)',
+            'fact: (movable tile5 pos3 pos3 pos2 pos2)',
+            'fact: (movable tile1 pos1 pos1 pos3 pos1)',
+            'fact: (movable tile1 pos1 pos1 pos3 pos3)',
+            'fact: (movable tile5 pos3 pos3 pos3 pos3)',
+        ]
+        self.checkKb(p8.kb, required, forbidden)
 
     def test07(self):
         th = Puzzle8Game()
@@ -151,32 +180,7 @@ class KBTest(unittest.TestCase):
         ]
         self.checkKb(p8.kb, required, forbidden)
 
-    def test09(self):
-        th = Puzzle8Game()
-        th.read('puzzle8_center_empty.txt')
-        expectedMovables = [
-            'fact: (movable tile2 pos2 pos1 pos2 pos2)',
-            'fact: (movable tile8 pos1 pos2 pos2 pos2)',
-            'fact: (movable tile6 pos2 pos3 pos2 pos2)',
-            'fact: (movable tile4 pos3 pos2 pos2 pos2)',
-        ]
-        self.checkMovables(th, expectedMovables)
-
-    def test10(self):
-        p8 = Puzzle8Game()
-        p8.read('puzzle8_center_empty.txt')
-        required = []
-        forbidden = [
-            'fact: (movable tile1 pos1 pos1 pos2 pos2)',
-            'fact: (movable tile3 pos3 pos1 pos2 pos2)',
-            'fact: (movable tile7 pos3 pos1 pos2 pos2)',
-            'fact: (movable tile5 pos3 pos3 pos2 pos2)',
-            'fact: (movable tile1 pos1 pos1 pos3 pos1)',
-            'fact: (movable tile1 pos1 pos1 pos3 pos3)',
-            'fact: (movable tile5 pos3 pos3 pos3 pos3)',
-        ]
-        self.checkKb(p8.kb, required, forbidden)
-
-
 if __name__ == '__main__':
     unittest.main()
+
+
